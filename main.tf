@@ -14,11 +14,14 @@ provider "aws" {
   region  = "us-west-2"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-00f7e5c52c0f43726"
-  instance_type = "t2.micro"
+# we need to create a vpc resource
+resource "aws_vpc" "olvpc" {
+    cidr_block = "192.168.0.0/16"
+    enable_dns_support = true
+    enable_dns_hostnames = true
 
-  tags = {
-    Name = "ExampleAppServerInstance"
-  }
+    tags = {
+      "Name" = "ol-vpc"
+    }
+  
 }
